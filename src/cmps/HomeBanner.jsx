@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
+import { movieService } from "../services/movie.service.local"
 import requests from "../requests"
 import axios from "axios"
-import { movieService } from "../services/movie.service.local"
 
 export function HomeBanner() {
     const [movie, setMovie] = useState([])
