@@ -1,13 +1,14 @@
+import axios from 'axios'
+import requests from '../requests.js'
 import { storageService } from './async-storage.service.js'
 import { httpService } from './http.service.js'
-import { SOCKET_EVENT_UPDATE_BOARD, socketService } from './socket.service.js'
 import { userService } from './user.service.js'
 import { utilService } from './util.service.js'
 
-const STORAGE_KEY = 'boardDB'
+const STORAGE_KEY = 'moviesDB'
 const BASE_URL = 'board'
 
-export const boardService = {
+export const movieService = {
     query,
     getBoardById,
     update,
@@ -74,8 +75,8 @@ async function update(type, boardId, groupId = null, taskId = null, { key, value
 }
 // Board functions
 async function query() {
-    return httpService.get(BASE_URL, null)
-    // return await storageService.query(STORAGE_KEY)
+    // return httpService.get(BASE_URL, null)
+    return await storageService.query(STORAGE_KEY)
 }
 
 async function getBoardById(boardId, filterBy = { txt: '', person: null }, sortBy) {
@@ -132,18 +133,18 @@ async function getBoardById(boardId, filterBy = { txt: '', person: null }, sortB
 }
 
 async function save(board) {
-    return await httpService.post(BASE_URL, board)
-    // return await storageService.post(STORAGE_KEY, board)
+    // return await httpService.post(BASE_URL, board)
+    return await storageService.post(STORAGE_KEY, board)
 }
 
 async function remove(boardId) {
-    return httpService.delete(`${BASE_URL}/${boardId}`, boardId)
-    // return await storageService.remove(STORAGE_KEY, boardId)
+    // return httpService.delete(`${BASE_URL}/${boardId}`, boardId)
+    return await storageService.remove(STORAGE_KEY, boardId)
 }
 
 function _createBoards() {
-    // let boards = utilService.loadFromStorage(STORAGE_KEY)
-    let boards = httpService.get(BASE_URL, null)
+    let boards = utilService.loadFromStorage(STORAGE_KEY)
+    // let boards = httpService.get(BASE_URL, null)
     if (!boards || !boards.length) {
         boards =
             [
@@ -1005,7 +1006,9 @@ function _createBoards() {
                 }
             ]
 
-        boards.forEach(board => httpService.post(BASE_URL, board))
-        // utilService.saveToStorage(STORAGE_KEY, boards)
+        // boards.forEach(board => httpService.post(BASE_URL, board))
+        utilService.saveToStorage(STORAGE_KEY, boards)
     }
 }
+
+

@@ -2,7 +2,7 @@
 @import "setup/_reset";
 
 // // SETUP
-// @import 'setup/_typography';
+@import 'setup/_typography';
 @import "setup/_variables";
 @import "setup/_mixins";
 @import "setup/_functions";
@@ -13,7 +13,11 @@
 @import "base/_layout";
 
 // // COMPONENTS
+@import "./cmps/HomeNavBar.scss";
+@import "./cmps/HomeBanner.scss";
+@import "./cmps/Row.scss";
 
 // //PAGES
+@import "./pages/HomePage.scss";
 
 //MQ

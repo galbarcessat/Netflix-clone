@@ -1,6 +1,14 @@
+import { HomeBanner } from "../cmps/HomeBanner";
+import { HomeNavBar } from "../cmps/HomeNavBar";
+import { RowList } from "../cmps/RowList";
+
 export function HomePage() {
 
     return (
-        <div>Home page!</div>
+        <div>
+            <HomeNavBar />
+            <HomeBanner />
+            <RowList />
+        </div>
     )
 }
