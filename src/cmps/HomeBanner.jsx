@@ -32,7 +32,9 @@ export function HomeBanner() {
         <header className="home-banner"
             style={{
                 backgroundSize: 'cover',
-                backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie.backdrop_path}")`,
+                backgroundImage: movie.backdrop_path
+                    ? `url("https://image.tmdb.org/t/p/original/${movie.backdrop_path}")`
+                    : 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Black_flag.svg/1200px-Black_flag.svg.png',
                 backgroundPosition: 'center center'
             }}>
 

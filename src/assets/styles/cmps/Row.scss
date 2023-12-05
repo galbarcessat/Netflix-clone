@@ -1,6 +1,6 @@
 .row-container {
     color: white;
-    font-size: rem(22px);
+    font-size: rem(25px);
     font-weight: 600;
     margin-left: 20px;
 
@@ -17,7 +17,7 @@
         }
 
         .poster {
-            max-height: 120px;
+            max-height: 130px;
             object-fit: contain;
             margin-right: 10px;
             transition: transform 450ms;
@@ -28,7 +28,7 @@
             }
 
             &.large-poster {
-                max-height: 250px;
+                max-height: 260px;
 
                 &:hover {
                     transform: scale(1.09);

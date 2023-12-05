@@ -21,11 +21,15 @@ export function Row({ title, fetchUrl, isLargeRow = false }) {
             <h2>{title}</h2>
 
             <div className="row-posters">
-                {movies?.map(movie => (
-                    <img
-                        className={"poster " + (isLargeRow ? 'large-poster' : '')}
-                        key={movie.id}
-                        src={`https://image.tmdb.org/t/p/original/${isLargeRow ? movie.poster_path : movie.backdrop_path}`} alt={movie.name} />
+                {movies?.map((movie) => (
+                    ((isLargeRow && movie.poster_path) || (!isLargeRow && movie.backdrop_path)) && (
+                        <img
+                            className={`poster ${isLargeRow ? 'large-poster' : ''}`}
+                            key={movie.id}
+                            src={`https://image.tmdb.org/t/p/original/${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
+                            alt={movie.name}
+                        />
+                    )
                 ))}
             </div>
 
