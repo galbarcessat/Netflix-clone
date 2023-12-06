@@ -1,6 +1,6 @@
 // Import the specific Firebase services you need
 import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged ,signOut} from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 // Your Firebase config object
@@ -20,4 +20,4 @@ const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 const db = getFirestore(app)
 
-export { db, auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged };
+export { db, auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged,signOut };

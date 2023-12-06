@@ -1,15 +1,18 @@
 import { useRef } from "react"
 import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "../firebase"
+import { useNavigate } from "react-router-dom"
 
 export function SignUpScreen() {
     const emailRef = useRef(null)
     const passwordRef = useRef(null)
+    const navigate = useNavigate()
 
     async function register(e) {
         e.preventDefault()
         try {
             const user = await createUserWithEmailAndPassword(auth, emailRef.current.value, passwordRef.current.value)
             console.log('new user:', user)
+            navigate('/')
         } catch (error) {
             console.log('error:', error)
             alert(error.message)
@@ -21,6 +24,7 @@ export function SignUpScreen() {
         try {
             const user = await signInWithEmailAndPassword(auth, emailRef.current.value, passwordRef.current.value)
             console.log('user from sign in:', user)
+            navigate('/')
         } catch (error) {
             console.log('error:', error)
             alert(error.message)

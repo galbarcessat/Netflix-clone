@@ -4,8 +4,8 @@ import { userReducer } from "./reducers/user.reducer"
 import { boardReducer } from "./reducers/board.reducer"
 
 const rootReducer = combineReducers({
-    boardModule: boardReducer,
-    // userModule: userReducer,
+    // boardModule: boardReducer,
+    userModule: userReducer,
 })
 
 
