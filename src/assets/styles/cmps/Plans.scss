@@ -1,0 +1,36 @@
+.plans-container {
+    .plan-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: rem(20px);
+        opacity: .8;
+        transition: all .2s;
+
+        h5 {
+            font-size: 1em;
+            font-weight: bold;
+            margin-bottom: rem(6px);
+        }
+
+        h6 {
+            font-size: .9em;
+            font-weight: bold;
+        }
+
+        &:hover {
+            opacity: 1;
+        }
+
+        .sub-btn {
+            padding: rem(10px) rem(20px);
+            color: white;
+            font-size: 1rem;
+            background-color: #e50914;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+    }
+
+}
