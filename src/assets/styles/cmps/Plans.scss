@@ -1,4 +1,9 @@
 .plans-container {
+
+    p {
+        margin-top: 1.25rem;
+    }
+
     .plan-container {
         display: flex;
         justify-content: space-between;
@@ -30,6 +35,11 @@
             border: none;
             font-weight: 600;
             cursor: pointer;
+
+            &.current-pack {
+                background-color: grey;
+                cursor: default;
+            }
         }
     }
 

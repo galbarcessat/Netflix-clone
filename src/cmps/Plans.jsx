@@ -1,9 +1,35 @@
 import { useEffect, useState } from "react"
 import { db } from "../firebase"
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, doc, addDoc, onSnapshot } from "firebase/firestore";
+import { loadStripe } from "@stripe/stripe-js";
 
-export function Plans({user}) {
+export function Plans({ user }) {
     const [products, setProducts] = useState([])
+    const [sub, setSub] = useState(null)
+
+    useEffect(() => {
+        async function fetchSubscriptions() {
+            try {
+                const subCollection = collection(db, 'customers', user.uid, 'subscriptions')
+                const subscriptionSnapshot = await getDocs(subCollection)
+
+                subscriptionSnapshot.forEach(subSnapshot => {
+                    setSub({
+                        role: subSnapshot.data().role,
+                        current_period_end: subSnapshot.data().current_period_end.seconds,
+                        current_period_start: subSnapshot.data().current_period_start.seconds,
+                    })
+                })
+
+            } catch (error) {
+                console.error('Error fetching subscriptions:', error);
+            }
+        }
+
+        fetchSubscriptions()
+
+    }, [user.uid])
+
 
     useEffect(() => {
 
@@ -24,7 +50,6 @@ export function Plans({user}) {
                             priceData: price.data()
                         }
                     })
-
                 })
 
                 setProducts(products)
@@ -38,21 +63,37 @@ export function Plans({user}) {
 
     }, [])
 
-    console.log('products:', products)
-    // FINISH AND LOADCHECOUT FUNCION!!!!!
-    // async function loadCheckout(priceId) {
-    //     const docRef =  collection("customers").doc(user.uid).collection("checkout_sessions").add({
-    //         price : priceId
+    async function loadCheckout(priceId) {
+        try {
+            const checkoutSessionsCollectionRef = collection(db, 'customers', user.uid, 'checkout_sessions')
+            const docRef = await addDoc(checkoutSessionsCollectionRef, {
+                price: priceId,
+                success_url: window.location.origin,
+                cancel_url: window.location.origin,
+            });
 
-    //     })
-    //     // const querySnapshot = await getDocs(docRef).
-        
-    // }
+            onSnapshot(docRef, async (snap) => {
+                const { error, sessionId } = snap.data()
+
+                if (error) {
+                    alert(`An error occurred: ${error.message}`)
+                } else if (sessionId) {
+                    const stripe = await loadStripe('pk_test_51OL9w2HPNEQMjfmDB2GvU3JQKaxgssHMK2BgVRpmK4whfTyEpaSl5IcizgBdr1tNeMCeh174tSBCgah1ejVEApvs0076aKk9UU')
+                    stripe.redirectToCheckout({ sessionId })
+                }
+            });
+        } catch (error) {
+            console.error('Error creating checkout session:', error)
+        }
+    }
+
 
     return (
         <div className="plans-container">
+            {sub && <p>Renewal date : {new Date(sub.current_period_end * 1000).toLocaleDateString()}</p>}
             {Object.entries(products).map(([productId, productData]) => {
 
+                const isCurrentPackage = productData?.name.toLowerCase().includes(sub?.role.toLowerCase())
 
                 return (
                     <div className="plan-container" key={productId}>
@@ -60,34 +101,11 @@ export function Plans({user}) {
                             <h5>{productData.name}</h5>
                             <h6>{productData.description}</h6>
                         </div>
-                        <button onClick={() => loadCheckout(productData.prices.priceId)} className="sub-btn">Subscribe</button>
+                        <button onClick={() => !isCurrentPackage && loadCheckout(productData.prices.priceId)}
+                            className={"sub-btn " + (isCurrentPackage ? 'current-pack' : '')}>{isCurrentPackage ? 'Current Package' : 'Subscribe'}</button>
                     </div>
                 )
             })}
         </div>
     )
 }
-
-
-
-// productsCollection
-//     , where('active', '==', true)
-//     , get()
-//         .then(querySnapshot => {
-//             const products = {}
-//             querySnapshot.forEach(async productDoc => {
-//                 products[productDoc.id] = productDoc.data()
-//                 const priceSnap = await productDoc.ref.collection("prices").get()
-//                 priceSnap.docs.forEach(price => {
-//                     products[productDoc.id].prices = {
-//                         priceId: price.id,
-//                         priceData: price.data()
-//                     }
-//                 })
-//             })
-//             setProducts(products)
-//         })
-//         .catch(err => {
-//             console.log('error:', err)
-//             throw err
-//         })
