@@ -12,6 +12,7 @@ import { ProfileScreen } from './pages/ProfileScreen';
 export function App() {
   const dispatch = useDispatch()
   const user = useSelector(state => state.userModule.user)
+  console.log('API Key:', import.meta.env.VITE_FIREBASE_API_KEY);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (userAuth) => {

@@ -78,7 +78,7 @@ export function Plans({ user }) {
                 if (error) {
                     alert(`An error occurred: ${error.message}`)
                 } else if (sessionId) {
-                    const stripe = await loadStripe('pk_test_51OL9w2HPNEQMjfmDB2GvU3JQKaxgssHMK2BgVRpmK4whfTyEpaSl5IcizgBdr1tNeMCeh174tSBCgah1ejVEApvs0076aKk9UU')
+                    const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLISH_KEY)
                     stripe.redirectToCheckout({ sessionId })
                 }
             });

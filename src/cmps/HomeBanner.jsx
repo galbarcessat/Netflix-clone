@@ -9,7 +9,7 @@ export function HomeBanner() {
     useEffect(() => {
         async function getMovieForBanner() {
             const res = await axios.get(requests.fetchNetflixOriginals)
-            movieService.save(res.data.results)
+            // movieService.save(res.data.results)
             const randomIndex = Math.floor(Math.random() * res.data.results.length - 1)
             console.log('MOVIE BANNER:', res.data.results[randomIndex])
             setMovie(res.data.results[randomIndex])
