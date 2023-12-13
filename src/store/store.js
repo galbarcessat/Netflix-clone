@@ -1,10 +1,10 @@
 import { combineReducers, compose, legacy_createStore as createStore } from "redux"
 
 import { userReducer } from "./reducers/user.reducer"
-import { boardReducer } from "./reducers/board.reducer"
+import { movieReducer } from "./reducers/movie.reducer"
 
 const rootReducer = combineReducers({
-    // boardModule: boardReducer,
+    movieModule: movieReducer,
     userModule: userReducer,
 })
 

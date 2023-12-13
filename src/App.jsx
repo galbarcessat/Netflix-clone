@@ -1,4 +1,4 @@
-import { Navigate, Route, BrowserRouter as Router, Routes, useNavigate } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './assets/styles/main.scss';
 
@@ -8,11 +8,11 @@ import { auth, onAuthStateChanged } from "../src/firebase"
 import { useEffect } from 'react';
 import { SET_USER } from './store/reducers/user.reducer';
 import { ProfileScreen } from './pages/ProfileScreen';
+import { MovieDetails } from './pages/MovieDetails';
 
 export function App() {
   const dispatch = useDispatch()
   const user = useSelector(state => state.userModule.user)
-  console.log('API Key:', import.meta.env.VITE_FIREBASE_API_KEY);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (userAuth) => {
@@ -36,12 +36,12 @@ export function App() {
 
   return (
     <Router>
-      {/* {user ? <Navigate to="/" /> : <Navigate to="/login" />} */}
       {!user ?
         <LoginScreen />
         :
         (<Routes>
           <Route element={<HomePage />} path="/" />
+          <Route element={<MovieDetails />} path="/movie" />
           <Route element={<LoginScreen />} path="/login" />
           <Route element={<ProfileScreen />} path="/profile" />
         </Routes>)}

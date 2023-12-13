@@ -1,18 +1,22 @@
 import { useEffect, useState } from "react"
-import { movieService } from "../services/movie.service.local"
 import requests from "../requests"
 import axios from "axios"
+import { SET_SELECTED_MOVIE } from "../store/reducers/movie.reducer"
+import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
 
 export function HomeBanner() {
     const [movie, setMovie] = useState([])
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     useEffect(() => {
         async function getMovieForBanner() {
             const res = await axios.get(requests.fetchNetflixOriginals)
-            // movieService.save(res.data.results)
             const randomIndex = Math.floor(Math.random() * res.data.results.length - 1)
-            console.log('MOVIE BANNER:', res.data.results[randomIndex])
-            setMovie(res.data.results[randomIndex])
+            
+            if(randomIndex === -1) setMovie(res.data.results[0])
+            else setMovie(res.data.results[randomIndex])
 
             return res
         }
@@ -25,6 +29,10 @@ export function HomeBanner() {
         return text?.length > size ? text.substr(0, size - 1) + '...' : text
     }
 
+    function onSelectedMovie(movie) {
+        dispatch({ type: SET_SELECTED_MOVIE, selectedMovie: movie })
+        navigate('/movie')
+    }
 
     if (!movie) return <div>Loading...</div>
     return (
@@ -43,7 +51,7 @@ export function HomeBanner() {
                 </h1>
 
                 <div className="banner-buttons">
-                    <button className="banner-btn">Play</button>
+                    <button onClick={() => onSelectedMovie(movie)} className="banner-btn">Play</button>
                     <button className="banner-btn">My List</button>
                 </div>
 

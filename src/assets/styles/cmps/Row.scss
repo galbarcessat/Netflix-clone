@@ -21,6 +21,7 @@
             object-fit: contain;
             margin-right: 10px;
             transition: transform 450ms;
+            cursor: pointer;
 
             &:hover {
                 transform: scale(1.08);

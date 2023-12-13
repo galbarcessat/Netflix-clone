@@ -4,7 +4,6 @@ import NetflixLogo from '../assets/imgs/NetflixLogo.png'
 import { SignUpScreen } from '../cmps/SignUpScreen'
 
 export function LoginScreen() {
-
     const [signIn, setSignIn] = useState(false)
 
 

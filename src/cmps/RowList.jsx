@@ -4,7 +4,6 @@ import { Row } from "./Row";
 export function RowList() {
     return (
         <>
-
         {/* {requests.objectKeys.map(title=> (
             <Row title={title}/>
         ))} */}
