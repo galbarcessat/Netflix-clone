@@ -6,7 +6,7 @@ import { userService } from './user.service.js'
 import { utilService } from './util.service.js'
 
 const STORAGE_KEY = 'moviesDB'
-const BASE_URL = 'board'
+const BASE_URL = 'movie'
 
 export const movieService = {
     query,

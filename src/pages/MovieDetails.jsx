@@ -1,45 +1,36 @@
-import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import { HomeNavBar } from "../cmps/HomeNavBar"
-import { storageService } from "../services/async-storage.service"
 import axios from "axios"
 import ReactPlayer from 'react-player'
+import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import { movieService } from "../services/movie.service.local"
+import { HomeNavBar } from "../cmps/HomeNavBar"
 
 export function MovieDetails() {
     const [movie, setMovie] = useState(null)
     const selectedMovie = useSelector(state => state.movieModule.selectedMovie)
-    const VIDEOS_DB = 'videosDB'
-    //FIX THE CACHING SYSTEM.
+
     useEffect(() => {
+        
         async function getVideo() {
             const movieName = selectedMovie?.name || selectedMovie?.original_name || selectedMovie?.title
-            const termVideosMap = await storageService.query(VIDEOS_DB) || {}
-            console.log('termVideosMap:', termVideosMap)
-            console.log('movieName:', movieName)
-            console.log('termVideosMap[movieName]:', termVideosMap[movieName])
-            console.log('try using find:', termVideosMap.find(movie => movie.name === movieName))
-            if (termVideosMap[movieName]) {
+            let savedMovies = await movieService.query()
+            console.log('savedMovies from storage:', savedMovies)
+            let movieFromStorage = savedMovies.find(movie => movie.title === movieName)
+            console.log('movieFromStorage:', movieFromStorage)
+            if (movieFromStorage) {
                 console.log('is already in local storage:')
-                setMovie(termMovieMap[movieName])
-                return termVideosMap[movieName]
+                setMovie(movieFromStorage)
+                return movieFromStorage
             } else {
                 const res = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&type=video&key=
                 ${import.meta.env.VITE_YT_KEY}&q=${movieName}-trailer`)
                 const firstResult = res.data.items[0]
                 const movieTrailer = {
                     id: firstResult.id.videoId,
-                    title: firstResult.snippet.title,
-                    img: {
-                        url: firstResult.snippet.thumbnails.default.url,
-                        width: firstResult.snippet.thumbnails.default.width,
-                        height: firstResult.snippet.thumbnails.default.height,
-                    }
+                    title: movieName
                 }
 
-                termVideosMap[movieName] = movieTrailer
-                storageService.post(VIDEOS_DB, termVideosMap)
-                console.log('saving to local storage termVideosMap:', termVideosMap)
-
+                movieService.save(movieTrailer)
                 setMovie(movieTrailer)
 
                 return movieTrailer
