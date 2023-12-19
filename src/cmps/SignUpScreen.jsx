@@ -30,6 +30,18 @@ export function SignUpScreen() {
             alert(error.message)
         }
     }
+    async function signInDemo(e) {
+        e.preventDefault()
+        try {
+            const user = await signInWithEmailAndPassword(auth, 'gal123@gmail.com', 'galgal')
+            console.log('user from sign in:', user)
+            navigate('/')
+        } catch (error) {
+            console.log('error:', error)
+            alert(error.message)
+        }
+    }
+
     return (
         <div className="signup-screen-container">
             <form>
@@ -37,6 +49,7 @@ export function SignUpScreen() {
                 <input ref={emailRef} type="email" placeholder="Email" />
                 <input ref={passwordRef} type="password" placeholder="Password" />
                 <button onClick={(e) => signIn(e)} type="submit">Sign In</button>
+                <button onClick={(e) => signInDemo(e)} type="submit">Demo account</button>
                 <h4>
                     <span className="new-to-netflix">New to Neftlix? </span>
                     <span onClick={(e) => register(e)} className="sign-up-now"> Sign Up now.</span>
