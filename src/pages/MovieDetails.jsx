@@ -10,13 +10,11 @@ export function MovieDetails() {
     const selectedMovie = useSelector(state => state.movieModule.selectedMovie)
 
     useEffect(() => {
-        
+
         async function getVideo() {
             const movieName = selectedMovie?.name || selectedMovie?.original_name || selectedMovie?.title
             let savedMovies = await movieService.query()
-            console.log('savedMovies from storage:', savedMovies)
             let movieFromStorage = savedMovies.find(movie => movie.title === movieName)
-            console.log('movieFromStorage:', movieFromStorage)
             if (movieFromStorage) {
                 console.log('is already in local storage:')
                 setMovie(movieFromStorage)
