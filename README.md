@@ -3,7 +3,7 @@
 [Live demo here](https://neflix-clone-czr8.onrender.com/ "Netflix link")
 ## This project is built using React, Redux, Firebase, Firestore, Stripe and SASS.
 
-![Main board image](/src/assets/img/FundayBoard.png "Board-main-page")
+![Home page image](/src/assets/img/NetflixHoemPage.png "Home-page")
 
 ## Technologies
 
@@ -39,22 +39,23 @@ That's it! The App should be opened automatically, enjoy!
 ### Homepage
 The landing page in which the user can sign up / login, or press the call to action button to start demo if the are limited with time.
 
-![Homepage image](src/assets/img/FundayHomePage.png "Home-page")
+![Home page image](/src/assets/img/NetflixHoemPage.png "Home-page")
 
 ### Signup/Login
 Firebase authentication with email and password.
 
-![Login image](/src/assets/img/FundayLogin.png "login-page")
+![Login image](/src/assets/img/NetflixLogin1.png "login-page1")
+![Login image](/src/assets/img/NetflixLogin2.png "login-page2")
 
 ### Movie Details
 Here, users can review movie details and watch its trailer.
 
-![Workspace image](src/assets/img/FundayBoardIndex.png "Workspace-page")
+![Movie details image](src/assets/img/NetflixMovieDetails.png "Movie details-page")
 
 ### Subscription plans
 Here you can view your subscription plan and change it to another one using stripe checkout.
 
-![Kanban view image](/src/assets/img/FundayKanban.png "kanban-details")
+![netflix plans image](/src/assets/img/NetflixPlans.png "netlifx-plans")
 
 ### Some mobile!
 Just a taste of the mobile experience.
