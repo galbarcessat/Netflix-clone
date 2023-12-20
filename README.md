@@ -3,7 +3,7 @@
 [Live demo here](https://neflix-clone-czr8.onrender.com/ "Netflix link")
 ## This project is built using React, Redux, Firebase, Firestore, Stripe and SASS.
 
-![Home page image](/src/assets/img/NetflixHoemPage.png "Home-page")
+![Home page image](/src/assets/imgs/NetflixHomePage.png "Home-page")
 
 ## Technologies
 
@@ -39,24 +39,24 @@ That's it! The App should be opened automatically, enjoy!
 ### Homepage
 The landing page in which the user can sign up / login, or press the call to action button to start demo if the are limited with time.
 
-![Home page image](/src/assets/img/NetflixHoemPage.png "Home-page")
+![Home page image](/src/assets/imgs/NetflixHomePage.png "Home-page")
 
 ### Signup/Login
 Firebase authentication with email and password.
 
-![Login image](/src/assets/img/NetflixLogin1.png "login-page1")
-![Login image](/src/assets/img/NetflixLogin2.png "login-page2")
+![Login image](/src/assets/imgs/NetflixLogin1.png "login-page1")
+![Login image](/src/assets/imgs/NetflixLogin2.png "login-page2")
 
 ### Movie Details
 Here, users can review movie details and watch its trailer.
 
-![Movie details image](src/assets/img/NetflixMovieDetails.png "Movie details-page")
+![Movie details image](src/assets/imgs/NetflixMovieDetails.png "Movie details-page")
 
 ### Subscription plans
 Here you can view your subscription plan and change it to another one using stripe checkout.
 
-![netflix plans image](/src/assets/img/NetflixPlans.png "netlifx-plans")
+![netflix plans image](/src/assets/imgs/NetflixPlans.png "netlifx-plans")
 
 ### Some mobile!
-Just a taste of the mobile experience.
-<img src="/src/assets/img/FundayHomeMobile.png" width="25%" style="float: left"/><img src="/src/assets/img/FundayBoardMobile.png" width="25%" style="float: left;"/><img src="/src/assets/img/FundayTaskDetailsMobile.png" width="25%" style="float: left;"/><img src="/src/assets/img/FundayDashboardMobile.png" width="25%" style="float: left;"/>
+
+<img src="/src/assets/imgs/NetflixHomePageMobile.png" width="25%" style="float: left"/><img src="/src/assets/imgs/LoginMobile1.png" width="25%" style="float: left;"/><img src="/src/assets/imgs/NetflixMovieDetailsMobile.png" width="25%" style="float: left;"/><img src="/src/assets/imgs/LoginMobile2.png" width="25%" style="float: left;"/>
